@@ -1,0 +1,8 @@
+{
+  "google.GoogleSearchToolSpec": {
+    "engine": "Your search engine id, see https://developers.google.com/custom-search/v1/overview#prerequisites",
+    "key": "Your search api key",
+    "num": 2
+  },
+  "wikipedia.WikipediaToolSpec": {}
+}
