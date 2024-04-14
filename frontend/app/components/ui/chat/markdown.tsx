@@ -15,11 +15,17 @@ const MemoizedReactMarkdown: FC<Options> = memo(
 export default function Markdown({ content }: { content: string }) {
   return (
     <MemoizedReactMarkdown
-      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words whitespace-pre-wrap text-sm"
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
+        h2({ children }) {
+          return <h2 className="font-semibold text-lg">{children}</h2>
+        },
+        h3({ children }) {
+          return <h3 className="font-semibold text-base">{children}</h3>
+        },
         p({ children }) {
-          return <p className="mb-2 last:mb-0">{children}</p>;
+          return <p className="mb-0 last:mb-0">{children}</p>;
         },
         code({ node, inline, className, children, ...props }) {
           if (children.length) {

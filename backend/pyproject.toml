@@ -3,7 +3,7 @@
 name = "app"
 version = "0.1.0"
 description = ""
-authors = [ "Marcus Schiesser <mail@marcusschiesser.de>" ]
+authors = [ "Rob Kopel <R0bk@users.noreply.github.com>" ]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -13,6 +13,10 @@ python-dotenv = "^1.0.0"
 llama-index = "0.10.15"
 llama-index-core = "0.10.15"
 llama-index-agent-openai = "0.1.5"
+llama-index-embeddings-azure-openai = "0.1.6"
+llama-index-llms-azure-openai = "0.1.5"
+llama-index-vector-stores-qdrant = "0.1.6"
+qdrant-client = "1.8.2"
 
 [tool.poetry.dependencies.uvicorn]
 extras = [ "standard" ]

@@ -1,4 +1,3 @@
-from typing import List
 from pydantic import BaseModel
 from fastapi.responses import StreamingResponse
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -15,7 +14,8 @@ class _Message(BaseModel):
 
 
 class _ChatData(BaseModel):
-    messages: List[_Message]
+    messages: list[_Message]
+    data: dict[str, str]
 
 
 @r.post("")
@@ -45,6 +45,8 @@ async def chat(
         for m in data.messages
     ]
 
+    chat_engine = chat_engine(data.data)
+
     # query chat engine
     response = await chat_engine.astream_chat(lastMessage.content, messages)
 
@@ -56,4 +58,4 @@ async def chat(
                 break
             yield token
 
-    return StreamingResponse(event_generator(), media_type="text/plain")
+    return StreamingResponse(event_generator(), headers={'X-Experimental-Stream-Data': 'true'}, media_type="text/plain")

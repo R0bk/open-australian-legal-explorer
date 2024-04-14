@@ -55,10 +55,7 @@ export default function ChatInput(
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="rounded-xl bg-white p-4 shadow-xl space-y-4"
-    >
+    <form onSubmit={onSubmit} className="p-4 space-y-4">
       {imageUrl && (
         <UploadImagePreview url={imageUrl} onRemove={onRemovePreviewImage} />
       )}

@@ -1,5 +1,4 @@
-import { User2 } from "lucide-react";
-import Image from "next/image";
+import { Brain, BrainCircuit, User2 } from "lucide-react";
 
 export default function ChatAvatar({ role }: { role: string }) {
   if (role === "user") {
@@ -12,14 +11,7 @@ export default function ChatAvatar({ role }: { role: string }) {
 
   return (
     <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border bg-black text-white shadow">
-      <Image
-        className="rounded-md"
-        src="/llama.png"
-        alt="Llama Logo"
-        width={24}
-        height={24}
-        priority
-      />
+      <BrainCircuit className="h-4 w-4" />
     </div>
   );
 }

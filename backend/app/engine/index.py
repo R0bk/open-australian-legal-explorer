@@ -1,22 +1,23 @@
 import logging
 import os
 
+import qdrant_client
 from llama_index.core.indices import VectorStoreIndex
-from llama_index.vector_stores.milvus import MilvusVectorStore
+from llama_index.vector_stores.qdrant import QdrantVectorStore
 
 
 logger = logging.getLogger("uvicorn")
 
 
 def get_index():
-    logger.info("Connecting to index from Milvus...")
-    store = MilvusVectorStore(
-        uri=os.getenv("MILVUS_ADDRESS"),
-        user=os.getenv("MILVUS_USERNAME"),
-        password=os.getenv("MILVUS_PASSWORD"),
-        collection_name=os.getenv("MILVUS_COLLECTION"),
-        dim=int(os.getenv("EMBEDDING_DIM", "1536")),
-    )
+    logger.info("Connecting to index from Qdrant...")
+    host, port = os.getenv("VECTOR_DB_HOST"), int(os.getenv("VECTOR_DB_PORT"))
+
+    client = qdrant_client.QdrantClient(host=host, port=port)
+    aclient = qdrant_client.AsyncQdrantClient(host=host, port=port)
+    
+    store = QdrantVectorStore(client=client, aclient=aclient, collection_name=os.getenv("VECTOR_DB_COLLECTION"))
     index = VectorStoreIndex.from_vector_store(store)
-    logger.info("Finished connecting to index from Milvus.")
+    logger.info("Finished connecting to index from Qdrant.")
+
     return index
